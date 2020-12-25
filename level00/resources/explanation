@@ -1,0 +1,14 @@
+Ищем все файлы которые принадлежат пользователю flag00, все ошибки отправляем вникуда
+find / -user flag00 2>/dev/null
+
+Смотрим а шо это там лежит
+cat /usr/sbin/john
+
+Получаем cdiiddwpgswtgt , пароль не рабочий
+гуглим decode rot , вбиваем пароль, получаем NOTTOOHARDHERE
+
+Далее все по сабжу
+su flag00
+пасс nottoohardhere
+getflag
+Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
